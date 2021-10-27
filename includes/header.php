@@ -1,4 +1,18 @@
-<?php include "includes/functions.php"?>
+<?php 
+
+	include "includes/functions.php";
+
+	$db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS,[
+		PDO::ATTR_EMULATE_PREPARES => false,
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+
+	$users_count = db_query("SELECT COUNT(id) FROM `users`")->fetchColumn();
+	$links_views_sum = db_query("SELECT SUM(views) FROM `links`")->fetchColumn();
+	$links_count = db_query("SELECT COUNT(id) FROM `links`")->fetchColumn();
+
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -32,5 +46,6 @@
 			</div>
 		</nav>
 	</header>
-    <?php echo get_url()?>
+	
+
     
